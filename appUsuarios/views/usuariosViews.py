@@ -6,9 +6,13 @@ from api.exceptions import *
 from rest_framework import  permissions
 
 class UsuariosCreateView(CreateAPIView):
-    permission_classes = (permissions.AllowAny,)
+    # permission_classes = (permissions.AllowAny,)
     serializer_class = UsuarioSerializer
 
-class UsuariosFilteredListView(CreateAPIView):
-    permission_classes = (permissions.AllowAny,)
+    def post(self, request, *args, **kwargs):
+        serializer = UsuarioSerializer(data=request.data)
+        if serializer.is_valid():
+            return self.create(request, *args, **kwargs)
+        log.info(f'campos incorrectos: {serializer.errors}')
+        raise Response400(serializer.errors)
     
