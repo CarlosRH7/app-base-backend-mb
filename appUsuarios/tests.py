@@ -50,4 +50,24 @@ class PostUsuariosTest(APITestCase):
         self.assertEqual(3, Usuario.objects.count())
         # self.assertEqual(18, Usuario.objects.get(id=3).edad)
         
+
+
+# python manage.py test appUsuarios.tests.GetUsuariosFilteredListTest --settings=server.settings.local
+class GetUsuariosFilteredListTest(APITestCase):
+    def setUp(self):
+        Usuario.objects.create(nombre='usuario_1', edad=15, isMayorEdad=False)
+        Usuario.objects.create(nombre='usuario_2', edad=35, isMayorEdad=True)
+        Usuario.objects.create(nombre='usuario_3', edad=18, isMayorEdad=True)
         
+        self.user = User.objects.create_user(username='gabriel', is_staff=True)  # IsAuthenticated
+    
+    def test(self):
+        self.client.force_authenticate(user=self.user)
+        
+        response = self.client.get('/api/usuarios/list/')
+        print(f'response JSON ===>>> 201-OK \n {json.dumps(response.json())} \n ---')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+        response = self.client.get('/api/usuarios/list/?nombre=usuario_1')
+        print(f'response JSON ===>>> 201-OK \n {json.dumps(response.json())} \n ---')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

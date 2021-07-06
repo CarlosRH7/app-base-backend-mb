@@ -4,6 +4,7 @@ from appUsuarios.serializers import *
 from api.logger import log
 from api.exceptions import *
 from rest_framework import  permissions
+from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
 class UsuariosCreateView(CreateAPIView):
     # permission_classes = (permissions.AllowAny,)
@@ -23,3 +24,15 @@ class UsuariosCreateView(CreateAPIView):
         log.info(f'campos incorrectos: {serializer.errors}')
         raise Response400(serializer.errors)
     
+
+class UsuariosFilter(FilterSet):
+    class Meta:
+        model = Usuario
+        fields = ['nombre']
+    
+
+class UsuariosFilteredListView(ListAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuariosFilteredListSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = UsuariosFilter
