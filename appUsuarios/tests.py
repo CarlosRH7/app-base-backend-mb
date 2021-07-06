@@ -8,14 +8,19 @@ from django.contrib.auth.models import User
 # python manage.py test appUsuarios.tests.PostUsuariosTest --settings=server.settings.local
 class PostUsuariosTest(APITestCase):
     def setUp(self):
+       
+        # preparacion de modelo a testiar 
         Usuario.objects.create(nombre='lencho')
         
+        # json de prueba
         self.json = {
             "nombre": "juanito"
         }
-        
+
+        # autenticaciones
         self.user = User.objects.create_user(username='gabriel', is_staff=True)  # IsAuthenticated
     
+    # Declaracion de pruebas -> pueden ir aumentando 
     def test(self):
         response = self.client.post('/api/usuarios/create/', data=json.dumps(self.json), content_type="application/json")
         print(f'response JSON ===>>> 401- no autenticado \n {json.dumps(response.json())} \n ---')
