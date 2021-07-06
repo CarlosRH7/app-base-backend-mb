@@ -5,6 +5,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 
 
+# python manage.py test appUsuarios.tests.PostUsuariosTest --settings=server.settings.local
 class PostUsuariosTest(APITestCase):
     def setUp(self):
         Usuario.objects.create(nombre='lencho')
@@ -32,5 +33,3 @@ class PostUsuariosTest(APITestCase):
         print(f'response JSON ===>>> 400 - error en json \n {json.dumps(response.json())} \n ---')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-
-# python manage.py test appUsuarios.test.PostUsuariosTest --settings=server.settings.local
