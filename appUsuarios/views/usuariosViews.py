@@ -12,6 +12,13 @@ class UsuariosCreateView(CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = UsuarioSerializer(data=request.data)
         if serializer.is_valid():
+            
+            if int(request.data.get('edad')) > 18:   
+                request.data['isMayorEdad'] = True
+            else: 
+                request.data['isMayorEdad'] = False
+            
+            
             return self.create(request, *args, **kwargs)
         log.info(f'campos incorrectos: {serializer.errors}')
         raise Response400(serializer.errors)

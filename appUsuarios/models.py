@@ -4,5 +4,7 @@ from django.db import models
 
 class Usuario(models.Model):
     nombre =  models.CharField(max_length=50, null=True)
+    edad =  models.PositiveSmallIntegerField(default=0)
+    isMayorEdad = models.BooleanField(default=False)
     class Meta:
         db_table = 'usuarios'
