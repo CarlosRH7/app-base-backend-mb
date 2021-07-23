@@ -5,7 +5,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 
 
-# python manage.py test appUsuarios.tests.PostUsuariosTest --settings=server.settings.local
+# python manage.py test appUsuarios.tests.PostUsuariosTest --settings=server.settings.dev
 class PostUsuariosTest(APITestCase):
     def setUp(self):
 
@@ -52,7 +52,7 @@ class PostUsuariosTest(APITestCase):
         
 
 
-# python manage.py test appUsuarios.tests.GetUsuariosFilteredListTest --settings=server.settings.local
+# python manage.py test appUsuarios.tests.GetUsuariosFilteredListTest --settings=server.settings.dev
 class GetUsuariosFilteredListTest(APITestCase):
     def setUp(self):
         Usuario.objects.create(nombre='usuario_1', edad=15, isMayorEdad=False)

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from rest_framework.generics import DestroyAPIView, ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView
 from appUsuarios.serializers import *
-from api.logger import log
+
+import logging
+log = logging.getLogger('django')
+
 from api.exceptions import *
 from rest_framework import  permissions
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
