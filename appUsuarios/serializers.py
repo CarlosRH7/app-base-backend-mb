@@ -12,3 +12,14 @@ class UsuariosFilteredListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = '__all__'
+
+
+class UsuarioDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+        
+class UsuarioUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
